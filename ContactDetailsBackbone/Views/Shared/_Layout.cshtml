@@ -3,26 +3,20 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Contact Details CRUD</title>
-	@Styles.Render("~/Content/css")
-	@Scripts.Render("~/bundles/jquery")
-	@Scripts.Render("~/bundles/backbone")
-	@Scripts.Render("~/bundles/model")
-	@Scripts.Render("~/bundles/collection")
-	@Scripts.Render("~/bundles/templates")	
-	@Scripts.Render("~/bundles/bootstrap")
+	@Styles.Render("~/Content/css")	
+	<script data-main="Scripts/main" src="~/Scripts/require-jquery.js"></script>	
 </head>
 <body>
 	<div class="wrap">
 		@RenderBody()
-	</div>	
-	@Scripts.Render("~/bundles/view")
-	@Scripts.Render("~/bundles/app")
+	</div>			
 	<div id="push">
 	</div>
 	<div id="footer">
 		<div class="container">
 			<p class="muted credit">
-				SPA implementation with Rest using WebAPI, BackboneJs, UnderScoreJs, SimpleData(ORM) & Twitter Bootstrap</p>
+				SPA implementation with Rest using WebAPI, BackboneJs, UnderScoreJs, RequireJs, SimpleData(ORM), 
+				<a href="~/SpecRunner.html">Jasmine Test</a> & Twitter Bootstrap</p>
 		</div>
 	</div>
 </body>

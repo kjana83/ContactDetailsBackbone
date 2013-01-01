@@ -4,28 +4,45 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Simple.Data;
 using ContactDetailsBackbone.Models;
+using Simple.Data;
 
 namespace ContactDetailsBackbone.Controllers
 {
+
+	/// <summary>
+	/// Contains all the action items for the Contact. 
+	/// </summary>
     public class ContactsController : ApiController
     {
+		private const string ACTIVE = "Active";
+		private const string INACTIVE = "Inactive";
 
-        // GET/Contacts/All
+		/// <summary>
+		/// GET/Contacts/All
+		/// </summary>
+		/// <returns></returns>
         public IEnumerable<Contact> Get()
         {
 			var db = Database.Open();
-            return db.Contact.FindAll(db.Contacts.Status=="Active");
+			return db.Contact.FindAll(db.Contact.Status == ACTIVE);
         }
-
-        // GET/Contacts/Id
+        
+		/// <summary>		
+		/// GET/Contacts/Id
+		/// </summary>
+		/// <param name="id">The id.</param>
+		/// <returns></returns>
         public Contact Get(int id)
         {
             return Database.Open().Contact.Get(id);
         }
 
-        // POST/Contact
+		/// <summary>
+		/// POST/Contact
+		/// </summary>
+		/// <param name="contact">The contact.</param>
+		/// <returns></returns>
         public HttpResponseMessage Post(Contact contact)
         {
             try
@@ -37,7 +54,7 @@ namespace ContactDetailsBackbone.Controllers
 					FirstName = contact.FirstName, 
 					Id = contacts.Count() + 1, 
 					LastName = contact.LastName,
-					Status="Active"
+					Status = ACTIVE
 					});
 
                 HttpResponseMessage response = Request.CreateResponse<Contact>(HttpStatusCode.Created, contact);
@@ -51,17 +68,25 @@ namespace ContactDetailsBackbone.Controllers
             }
         }
 
-        // PUT/Contacts/
+		/// <summary>
+		/// PUT/Contacts/
+		/// </summary>
+		/// <param name="contact">The contact.</param>
+		/// <returns></returns>
         public Contact Put(Contact contact)
         {
 			Database.Open().Contact.Update(contact);
 			return contact;
         }
-
-		// Delete/Contacts/id
+		
+		/// <summary>
+		/// Delete/Contacts/id
+		/// </summary>
+		/// <param name="Id">The id.</param>
+		/// <returns></returns>
 		public Contact Delete(int Id)
 		{
-			var status = Database.Open().Contact.UpdateById(Id:Id, Status: "Inactive");
+			var status = Database.Open().Contact.UpdateById(Id:Id, Status: INACTIVE);
 
 			if (status != null)
 			{
@@ -71,6 +96,11 @@ namespace ContactDetailsBackbone.Controllers
 			throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
 		}
 
+		/// <summary>
+		/// Gets the contact location.
+		/// </summary>
+		/// <param name="contactID">The contact ID.</param>
+		/// <returns></returns>
         Uri GetContactLocation(int contactID)
         {
             var controller = this.Request.GetRouteData().Values["controller"];

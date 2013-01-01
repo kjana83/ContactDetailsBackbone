@@ -12,5 +12,10 @@ namespace ContactDetailsBackbone.Controllers
 		{
 			return View();
 		}
+
+		public ViewResult SpecRunner()
+		{
+			return View();
+		}
 	}
 }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jasmine Spec Runner</title>
+  <script data-main="Scripts/main" src="Scripts/require-jquery.js"></script>
+  <link rel="stylesheet" type="text/css" href="/Scripts/jasmine-1.2.0/jasmine.css">
+  <script type="text/javascript" src="/Scripts/jasmine-1.2.0/jasmine.js"></script>
+  <script type="text/javascript" src="/Scripts/jasmine-1.2.0/jasmine-html.js"></script>
+
+  <script type="text/javascript">
+    
+    require([
+	'spec/require.spec',
+	'spec/model.spec',
+	'spec/collection.spec'
+	],         
+        function() {
+                var jasmineEnv = jasmine.getEnv();
+                jasmineEnv.addReporter(new  jasmine.HtmlReporter());
+                          //jasmineEnv.specFilter = function(spec) {
+                          //   return htmlReporter.specFilter(spec);
+                          //};
+
+                jasmineEnv.execute();
+        });
+    
+    </script>
+
+</head>
+
+<body>
+</body>
+</html>
